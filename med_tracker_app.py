@@ -21,7 +21,7 @@ def main():
             case 2:
                 try:
                     med = input("Medication: ")
-                    amount = int(input("Amount:"))
+                    amount = int(input("Amount: "))
                     print(app.change_modifier(med, amount))
                 except:
                     print("Invalid input")
@@ -29,25 +29,26 @@ def main():
             case 3:
                 try:
                     med = input("Medication: ")
-                    amount = int(input("Amount:"))
+                    amount = int(input("Amount: "))
                     print(app.add_medicine(med, amount))
                 except:
                     print("Invalid input")
 
             case 4:
-                try:
+                # try:
                     med = input("Medication: ")
-                    amount = int(input("Amount:"))
-                    print(app.add_new(med, amount))
-                except:
-                    print("Invalid input")
+                    amount = int(input("Amount: "))
+                    modifier = int(input("Amount per day: "))
+                    print(app.add_new(med, amount, modifier))
+                # except:
+                #     print("Invalid input")
 
             case 5:
                 running = False
                 pass
 
-        again = input("Another action[yes/no]?\n")
-        if again == "no":
+        again = input("Another action[n to exit]?\n")
+        if again == "n":
             running = False
 
 if __name__ == "__main__":

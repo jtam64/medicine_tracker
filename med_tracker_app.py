@@ -1,6 +1,8 @@
 from resources.tracker import Medicine
 
 def main():
+    '''CLI interface for interacting with the application
+    '''
     app = Medicine()
     running = True
 

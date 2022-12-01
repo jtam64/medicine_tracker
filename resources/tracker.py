@@ -46,7 +46,7 @@ class Medicine():
         string = ""
         for medicine in self.medicines["medicines"]:
             medication = self.medicines["medicines"][medicine]
-            string += f"{medicine} has {medication['quantity']} and {medication['remaining_days']} and will run out on {medication['end_date']} \n"
+            string += f"There is {medication['quantity']} pills of {medicine}. You will run out after {medication['remaining_days']} days which is {medication['end_date']} \n"
         return (string)
 
     def get_dates(self):
@@ -93,5 +93,13 @@ class Medicine():
         self.write_JSON()
         return f"\n{name} modifier {old} changed to {amount}\n"
 
-
-a = Medicine()
+    def add_new(self, name:str, quantity:int)->str:
+        self.medicines["medicines"][name] = {
+            "quantity": quantity,
+            "end_date": "",
+            "remaining_days": 0,
+            "modifier": 0
+        }
+        self.write_JSON()
+        self.get_dates()
+        return f"\nadded medication {name} with quantity {quantity}\n"

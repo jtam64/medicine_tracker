@@ -7,7 +7,7 @@ def main():
     running = True
 
     while running:
-        user_input = input("What would you like to do \n1. Check total medicine\n2. Change modifier\n3. Add medication\n4. Exit\n")
+        user_input = input("What would you like to do \n1. Check total medicine\n2. Change modifier\n3. Add medication\n4. Add new medication\n5. Exit\n")
 
         if user_input == "":
             running = False
@@ -35,6 +35,14 @@ def main():
                     print("Invalid input")
 
             case 4:
+                try:
+                    med = input("Medication: ")
+                    amount = int(input("Amount:"))
+                    print(app.add_new(med, amount))
+                except:
+                    print("Invalid input")
+
+            case 5:
                 running = False
 
 

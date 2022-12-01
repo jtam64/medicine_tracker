@@ -44,7 +44,11 @@ def main():
 
             case 5:
                 running = False
+                pass
 
+        again = input("Another action[yes/no]?\n")
+        if again == "no":
+            running = False
 
 if __name__ == "__main__":
     main()

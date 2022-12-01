@@ -1,10 +1,15 @@
 {
-    "phen": {
-        "quantity": 0,
-        "end_date": "00/00/0000"
-    },
-    "dilt": {
-        "quantity": 0,
-        "end_date": "00/00/0000"
+    "last_check": "2022-11-30 00:00:00",
+    "medicines": {
+        "phen": {
+            "quantity": 115,
+            "end_date": "2022-12-23 00:00:00",
+            "remaining_days": 23
+        },
+        "dilt": {
+            "quantity": 85,
+            "end_date": "2022-12-14 00:00:00",
+            "remaining_days": 14
+        }
     }
 }

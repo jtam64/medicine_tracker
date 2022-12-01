@@ -23,15 +23,19 @@ class Medicine():
         with open("resources/medicine.json", "w") as f:
             json.dump(self.medicines, f)
 
-    def add_medicine(self, name: str, quantity: int):
+    def add_medicine(self, name: str, quantity: int)->str:
         '''Increase quantity for the specified medication
 
         Args:
             name (str): Name of the medication
             quantity (int): Number to increase by
+
+        Returns:
+            (str): A string for confirmation
         '''
         self.medicines["medicines"][name]["quantity"] += quantity
         self.get_dates()
+        return f"\nAdded {quantity} to {name}\n"
 
     def __str__(self) -> str:
         '''Dunder method to print all the medicines and their total number remaining, days remaining, and end date
@@ -74,15 +78,20 @@ class Medicine():
                     end_date)
             self.write_JSON()
 
-    def change_modifier(self, name: str, amount: int):
+    def change_modifier(self, name: str, amount: int)->str:
         '''Change the modifier value
 
         Args:
             name (str): Name of medicine
             amount (int): New modifier amount
+        
+        Returns:
+            (str): A string to confirm
         '''
+        old = self.medicines["medicines"][name]["modifier"]
         self.medicines["medicines"][name]["modifier"] = amount
         self.write_JSON()
+        return f"\n{name} modifier {old} changed to {amount}\n"
 
 
 a = Medicine()

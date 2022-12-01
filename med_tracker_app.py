@@ -35,13 +35,13 @@ def main():
                     print("Invalid input")
 
             case 4:
-                # try:
+                try:
                     med = input("Medication: ")
                     amount = int(input("Amount: "))
                     modifier = int(input("Amount per day: "))
                     print(app.add_new(med, amount, modifier))
-                # except:
-                #     print("Invalid input")
+                except:
+                    print("Invalid input")
 
             case 5:
                 running = False

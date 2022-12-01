@@ -50,7 +50,7 @@ class Medicine():
         return (string)
 
     def update_quantity(self):
-        '''Checks if todays date is the same as the last check. If it is, go through the medicaiton and change the remaining quantity, remaining days, days till depleted and updates the last check to todays date
+        '''Updates the quantity remaining. Sends data to update() to update the JSON
         '''
         last_check = datetime.datetime.strptime(
             self.medicines["last_check"][0:10], "%Y-%m-%d")
@@ -71,6 +71,11 @@ class Medicine():
                 self.update(medicine)
 
     def update(self, name: str):
+        '''Modify JSON so it reflect correct dates
+
+        Args:
+            name (str): Name of the medication to be updated
+        '''
         modifier = self.medicines["medicines"][name]["modifier"]
         today = datetime.datetime.today().strptime(datetime.datetime.today().strftime("%Y-%m-%d"), "%Y-%m-%d")
         remaining_days = int(self.medicines["medicines"][name]["quantity"]) // modifier

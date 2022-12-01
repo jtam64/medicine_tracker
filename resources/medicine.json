@@ -1,0 +1,17 @@
+{
+    "last_check": "2022-11-30 00:00:00",
+    "medicines": {
+        "phen": {
+            "quantity": 109,
+            "end_date": "2022-12-21 00:00:00",
+            "remaining_days": 21,
+            "modifier": 5
+        },
+        "dilt": {
+            "quantity": 78,
+            "end_date": "2022-12-13 00:00:00",
+            "remaining_days": 13,
+            "modifier": 6
+        }
+    }
+}

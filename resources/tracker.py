@@ -11,6 +11,10 @@ class Medicine():
         self.read_JSON()
         self.update_quantity()
 
+    def pre_check(self, name):
+        if name not in self.medicines["medicines"].keys():
+            return (f"{name} is not registered in the database")
+
     def read_JSON(self):
         '''Read the json file
         '''
@@ -33,6 +37,9 @@ class Medicine():
         Returns:
             (str): A string for confirmation
         '''
+        if name not in self.medicines["medicines"].keys():
+            return (f"{name} is not registered in the database")
+
         self.medicines["medicines"][name]["quantity"] += quantity
         self.update_quantity()
         return f"\nAdded {quantity} to {name}\n"
@@ -76,6 +83,9 @@ class Medicine():
         Args:
             name (str): Name of the medication to be updated
         '''
+        if name not in self.medicines["medicines"].keys():
+            return (f"{name} is not registered in the database")
+
         modifier = self.medicines["medicines"][name]["modifier"]
         today = datetime.datetime.today().strptime(datetime.datetime.today().strftime("%Y-%m-%d"), "%Y-%m-%d")
         remaining_days = int(self.medicines["medicines"][name]["quantity"]) // modifier
@@ -96,12 +106,16 @@ class Medicine():
         Returns:
             (str): A string to confirm
         '''
+        if name not in self.medicines["medicines"].keys():
+            return (f"{name} is not registered in the database")
+
         old = self.medicines["medicines"][name]["modifier"]
         self.medicines["medicines"][name]["modifier"] = amount
         self.write_JSON()
         return f"\n{name} modifier {old} changed to {amount}\n"
 
     def add_new(self, name: str, quantity: int, modifier: int) -> str:
+
         self.medicines["medicines"][name] = {
             "quantity": quantity,
             "end_date": "0000-00-00 00:00:00",

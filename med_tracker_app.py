@@ -5,7 +5,7 @@ def main():
     '''
     app = Medicine()
     running = True
-
+    print(app.medicines["last_check"])
     while running:
         user_input = input("What would you like to do \n1. Check total medicine\n2. Change modifier\n3. Add medication\n4. Add new medication\n5. Exit\n")
 

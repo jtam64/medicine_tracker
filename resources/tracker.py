@@ -41,6 +41,7 @@ class Medicine():
             return (f"{name} is not registered in the database")
 
         self.medicines["medicines"][name]["quantity"] += quantity
+        self.write_JSON()
         self.update_quantity()
         return f"\nAdded {quantity} to {name}\n"
 
@@ -76,6 +77,9 @@ class Medicine():
                         str(today - last_check).removesuffix(f" day, 0:00:00")) * modifier
 
                 self.update(medicine)
+        else:
+            for medicine in self.medicines["medicines"]:
+                self.update(medicine)
 
     def update(self, name: str):
         '''Modify JSON so it reflect correct dates
@@ -87,8 +91,10 @@ class Medicine():
             return (f"{name} is not registered in the database")
 
         modifier = self.medicines["medicines"][name]["modifier"]
-        today = datetime.datetime.today().strptime(datetime.datetime.today().strftime("%Y-%m-%d"), "%Y-%m-%d")
-        remaining_days = int(self.medicines["medicines"][name]["quantity"]) // modifier
+        today = datetime.datetime.today().strptime(
+            datetime.datetime.today().strftime("%Y-%m-%d"), "%Y-%m-%d")
+        remaining_days = float(
+            self.medicines["medicines"][name]["quantity"]) // modifier
         end_date = today + datetime.timedelta(days=remaining_days)
 
         self.medicines["last_check"] = str(today)

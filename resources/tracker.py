@@ -262,3 +262,5 @@ class Medicine():
         self.write_JSON()
         self.update_quantity()
         return True
+    
+a = Medicine()

@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  web:
+    image: med_tracker
+    ports:
+    - "1554:1554"
+    volumes:
+    - .:/app

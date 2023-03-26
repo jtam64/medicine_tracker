@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+    <h1 class="position-absolute top-0 start-50 translate-middle-x">Dashboard</h1>
+    <div class="row">
+        {% for item, values in data.items() %}
+        <div class="col d-flex flex-wrap mt-3">
+            <card class="card" style="width: 25rem;">
+                <cardbody class="card-body">
+                    <cardtitle class="card-title text-primary fw-bold">{{ item }}</cardtitle>
+                    <cardcontent class="card-text">
+                        <table class="table"">
+                            <tbody>
+                                <tr>
+                                    <th scope="col">Quantity</th>
+                                    <td scope="col">{{ values.quantity }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">End Date</th>
+                                    <td scope="col">{{ values.end_date[:-9] }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Remaining Days</th>
+                                    <td>{{ values.remaining_days }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Modifier</th>
+                                    <td>{{ values.modifier }}</td>
+                                </tr>
+                                </d>
+                            </tbody>
+                        </table>
+                    </cardcontent>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit_medicine{{ item }}">Edit</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_medicine{{ item }}">Delete</button>
+                </cardbody>
+            </card>
+        </div>
+
+        <!-- Edit modal -->
+        <form class="modal fade" id="edit_medicine{{ item }}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true" action="" method="post">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit {{ item }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="name" value="{{ item }}">
+                        <input type="hidden" name="type" value="edit">
+                        <label for="quantity" class="form-label">Edit quantity</label>
+                        <input type="number" class="form-control" name="quantity" placeholder="{{ values.quantity }}" value="{{ values.quantity }}">
+                        <label for="modifier" class="form-label">Edit modifier</label>
+                        <input type="number" class="form-control" name="modifier" placeholder="{{ values.modifier }}" value="{{ values.modifier }}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</input>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- Delete modal -->
+        <form class="modal fade" id="delete_medicine{{ item }}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true" action="" method="post">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete {{ item }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="type" value="delete">
+                        <p>Are you sure you want to delete {{ item }}?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Confirm</input>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Cancel</input>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {% endfor %}
+    </div>
+    <button type="button" class="position-absolute bottom-0 end-0 btn btn-link" data-bs-toggle="modal" data-bs-target="#add_medicine"><i class="bi bi-plus-circle-fill" style="font-size: 70px; margin: 20px;"></i></button>
+    <!-- Add modal -->
+    <form class="modal fade" id="add_medicine" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true" action="" method="post">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Medication<h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="name" value="{{ item }}">
+                    <input type="hidden" name="delete" value="TRUE">
+                    <p>Are you sure you want to delete {{ item }}?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Confirm</input>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Cancel</input>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

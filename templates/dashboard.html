@@ -55,6 +55,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Submit</input>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Cancel</input>
                     </div>
                 </div>
             </div>
@@ -81,6 +82,7 @@
         </form>
         {% endfor %}
     </div>
+    
     <button type="button" class="position-absolute bottom-0 end-0 btn btn-link" data-bs-toggle="modal" data-bs-target="#add_medicine"><i class="bi bi-plus-circle-fill" style="font-size: 70px; margin: 20px;"></i></button>
     <!-- Add modal -->
     <form class="modal fade" id="add_medicine" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true" action="" method="post">
@@ -91,9 +93,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="name" value="{{ item }}">
-                    <input type="hidden" name="delete" value="TRUE">
-                    <p>Are you sure you want to delete {{ item }}?</p>
+                    <input type="hidden" name="type" value="add">
+                    <label for="name" class="form-label">Medication Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="Medication Name">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <input type="number" class="form-control" name="quantity" placeholder="Quantity">
+                    <label for="modifier" class="form-label">Modifier</label>
+                    <input type="number" class="form-control" name="modifier" placeholder="Modifier">
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Confirm</input>

@@ -13,6 +13,7 @@ def index():
 @app.route('/dashboard', methods=["GET", "POST"])
 def dashboard():
     if request.method == "GET":
+        tracker.update_quantity()
         return render_template("dashboard.html", data=tracker.dashboard_info())
 
     elif request.method == "POST":

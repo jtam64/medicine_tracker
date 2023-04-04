@@ -46,16 +46,23 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <!-- Hidden inputs -->
                         <input type="hidden" name="oldname" value="{{ item }}">
                         <input type="hidden" name="type" value="edit">
+                        <!-- Change name of medication -->
                         <label for="name" class="form-label">Edit name</label>
                         <input type="text" name="name" value="{{ item }}">
-                        <label for="quantity" class="form-label">Edit quantity</label>
-                        <input type="number" class="form-control" name="quantity" placeholder="{{ values.quantity }}" value="{{ values.quantity }}">
+                        <!-- Change quantity -->
+                        <div stye="display: flex; flex-direction: row;">
+                            <label for="quantity" class="form-label">Edit quantity</label>
+                            <input type="number" class="form-control" name="quantity" placeholder="{{ values.quantity }}" value="{{ values.quantity }}" step="50">
+                        </div>
+                        <!-- Change modifier -->
                         <label for="modifier" class="form-label">Edit modifier</label>
                         <input type="number" class="form-control" name="modifier" placeholder="{{ values.modifier }}" value="{{ values.modifier }}">
                     </div>
                     <div class="modal-footer">
+                        <!-- Submit or cancel -->
                         <button type="submit" class="btn btn-primary">Submit</input>
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Cancel</input>
                     </div>
@@ -100,7 +107,7 @@
                     <label for="name" class="form-label">Medication Name</label>
                     <input type="text" class="form-control" name="name" placeholder="Medication Name">
                     <label for="quantity" class="form-label">Quantity</label>
-                    <input type="number" class="form-control" name="quantity" placeholder="Quantity">
+                    <input type="number" class="form-control" name="quantity" placeholder="Quantity" step="50">
                     <label for="modifier" class="form-label">Modifier</label>
                     <input type="number" class="form-control" name="modifier" placeholder="Modifier">
                 </div>
@@ -111,4 +118,6 @@
             </div>
         </div>
     </form>
+<script>
+</script>
 {% endblock %}

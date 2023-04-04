@@ -12,11 +12,6 @@ class Medicine():
         self.update_quantity()
 
 
-    def pre_check(self, name):
-        if name not in self.medicines["medicines"].keys():
-            return (f"{name} is not registered in the database")
-
-
     def read_JSON(self):
         '''Read the json file
         '''
@@ -259,6 +254,26 @@ class Medicine():
 
         self.medicines["medicines"].pop(name)
 
+        self.write_JSON()
+        self.update_quantity()
+        return True
+    
+    def change_name(self, old_name: str, new_name: str) -> bool:
+        '''Change the name of the medication
+
+        Args:
+            old_name (str): Old name of the medication
+            new_name (str): New name of the medication
+
+        Returns:
+            (bool): True if successful, False if not
+        '''
+        old_name = old_name.upper()
+        new_name = new_name.upper()
+        if old_name not in self.medicines["medicines"].keys():
+            return False
+
+        self.medicines["medicines"][new_name] = self.medicines["medicines"].pop(old_name)
         self.write_JSON()
         self.update_quantity()
         return True

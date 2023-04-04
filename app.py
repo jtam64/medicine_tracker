@@ -19,6 +19,7 @@ def dashboard():
     elif request.method == "POST":
         try:
             name = request.form.get("name")
+            old_name = request.form.get("oldname")
             quantity = request.form.get("quantity")
             modifier = request.form.get("modifier")
             type = request.form.get("type")
@@ -26,6 +27,8 @@ def dashboard():
             if type == "edit":
                 tracker.medicine_quantity(name, int(quantity))
                 tracker.change_modifier(name, int(modifier))
+                if old_name != name:
+                    tracker.change_name(old_name, name)
 
             elif type == "delete":
                 tracker.delete_medicine(name)

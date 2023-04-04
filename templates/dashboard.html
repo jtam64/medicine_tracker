@@ -46,8 +46,10 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" name="name" value="{{ item }}">
+                        <input type="hidden" name="oldname" value="{{ item }}">
                         <input type="hidden" name="type" value="edit">
+                        <label for="name" class="form-label">Edit name</label>
+                        <input type="text" name="name" value="{{ item }}">
                         <label for="quantity" class="form-label">Edit quantity</label>
                         <input type="number" class="form-control" name="quantity" placeholder="{{ values.quantity }}" value="{{ values.quantity }}">
                         <label for="modifier" class="form-label">Edit modifier</label>

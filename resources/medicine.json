@@ -1,1 +1,23 @@
-{"last_check": "2023-04-04 00:00:00", "medicines": {"IBUPROFEN": {"quantity": 86, "end_date": "2023-04-11 00:00:00", "remaining_days": 7.0, "modifier": 12}, "ASPIRIN": {"quantity": 59, "end_date": "2023-04-07 00:00:00", "remaining_days": 3.0, "modifier": 15}, "PARACETAMOL": {"quantity": 178, "end_date": "2023-04-13 00:00:00", "remaining_days": 9.0, "modifier": 18}, "BENADRYL": {"quantity": 150, "end_date": "2023-04-11 00:00:00", "remaining_days": 7.0, "modifier": 20}}}
+{
+    "last_check": "2023-04-04 00:00:00",
+    "medicines": {
+        "IBUPROFEN": {
+            "quantity": 150,
+            "end_date": "2023-05-11 00:00:00",
+            "remaining_days": 37.0,
+            "modifier": 4
+        },
+        "TYLENOL": {
+            "quantity": 100,
+            "end_date": "2023-05-07 00:00:00",
+            "remaining_days": 33.0,
+            "modifier": 3
+        },
+        "ADVIL": {
+            "quantity": 50,
+            "end_date": "2023-04-10 00:00:00",
+            "remaining_days": 6.0,
+            "modifier": 8
+        }
+    }
+}

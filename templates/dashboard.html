@@ -68,7 +68,7 @@
                     <div class="modal-footer">
                         <!-- Submit or cancel -->
                         <button type="submit" class="btn btn-primary">Submit</input>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Cancel</input>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close" onclick="resetValue('{{ values.quantity }}', '{{ item }}')">Cancel</input>
                     </div>
                 </div>
             </div>
@@ -126,6 +126,10 @@
     function increment(value, item){
         let currentValue = document.getElementById(item);
         currentValue.value = parseInt(currentValue.value) + value;
-      }
+      };
+    function resetValue(value, item) {
+        let element = document.getElementById(item);
+        element.value = value;
+    };
 </script>
 {% endblock %}

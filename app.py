@@ -25,8 +25,8 @@ def dashboard():
             type = request.form.get("type")
 
             if type == "edit":
-                tracker.medicine_quantity(name, int(quantity))
-                tracker.change_modifier(name, int(modifier))
+                tracker.medicine_quantity(name, float(quantity))
+                tracker.change_modifier(name, float(modifier))
                 if old_name != name:
                     tracker.change_name(old_name, name)
 
@@ -34,7 +34,7 @@ def dashboard():
                 tracker.delete_medicine(name)
             
             elif type == "add":
-                tracker.add_new(name.upper(), int(quantity), int(modifier))
+                tracker.add_new(name.upper(), float(quantity), float(modifier))
 
             return redirect(url_for("dashboard"))
         

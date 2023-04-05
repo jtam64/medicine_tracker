@@ -21,7 +21,7 @@
                                 </tr>
                                 <tr>
                                     <th scope="col">Remaining Days</th>
-                                    <td>{{ values.remaining_days }}</td>
+                                    <td>{{ values.remaining_days | int }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="col">Modifier</th>
@@ -63,7 +63,7 @@
                         </div>
                         <!-- Change modifier -->
                         <label for="modifier" class="form-label">Edit modifier</label>
-                        <input type="number" class="form-control" name="modifier" placeholder="{{ values.modifier }}" value="{{ values.modifier }}">
+                        <input type="number" class="form-control" name="modifier" placeholder="{{ values.modifier }}" value="{{ values.modifier }}" step="0.1">
                     </div>
                     <div class="modal-footer">
                         <!-- Submit or cancel -->
@@ -113,7 +113,7 @@
                     <label for="quantity" class="form-label">Quantity</label>
                     <input type="number" class="form-control" name="quantity" placeholder="Quantity">
                     <label for="modifier" class="form-label">Modifier</label>
-                    <input type="number" class="form-control" name="modifier" placeholder="Modifier">
+                    <input type="number" class="form-control" name="modifier" placeholder="Modifier" step="0.1">
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Confirm</input>

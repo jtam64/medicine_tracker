@@ -26,12 +26,12 @@ class Medicine():
             json.dump(self.medicines, f)
 
 
-    def add_medicine(self, name: str, quantity: int) -> str:
+    def add_medicine(self, name: str, quantity: float) -> str:
         '''Increase quantity for the specified medication
 
         Args:
             name (str): Name of the medication
-            quantity (int): Number to increase by
+            quantity (float): Number to increase by
 
         Returns:
             (str): A string for confirmation
@@ -49,12 +49,12 @@ class Medicine():
         return f"\nAdded {quantity} to {name}\n"
 
 
-    def remove_medicine(self, name: str, quantity: int) -> str:
+    def remove_medicine(self, name: str, quantity: float) -> str:
         '''Decrease quantity for the specified medication
 
         Args:
             name (str): Name of the medication
-            quantity (int): Number to decrease by
+            quantity (float): Number to decrease by
 
         Returns:
             (str): A string for confirmation
@@ -72,7 +72,7 @@ class Medicine():
         return f"\nRemoved {quantity} from {name}\n"
 
 
-    def check_quantity(self, name: str) -> int:
+    def check_quantity(self, name: str) -> float:
         '''Check the quantity for the specified medication
 
         Args:
@@ -85,15 +85,15 @@ class Medicine():
         if name not in self.medicines["medicines"].keys():
             return (f"{name} is not registered in the database")
 
-        return int(self.medicines['medicines'][name]['quantity'])
+        return float(self.medicines['medicines'][name]['quantity'])
 
 
-    def medicine_quantity(self, name: str, quantity: int) -> bool:
+    def medicine_quantity(self, name: str, quantity: float) -> bool:
         '''Update the quantity for the specified medication
 
         Args:
             name (str): Name of the medication
-            quantity (int): Number to update to
+            quantity (float): Number to update to
 
         Returns:
             (str): A string for confirmation
@@ -181,7 +181,7 @@ class Medicine():
         self.medicines["medicines"][name]["end_date"] = str(end_date)
         self.write_JSON()
 
-    def check_modifier(self, name:str) -> int:
+    def check_modifier(self, name:str) -> float:
         '''Check the modifier for the specified medication
 
         Args:
@@ -194,15 +194,15 @@ class Medicine():
         if name not in self.medicines["medicines"].keys():
             return (f"{name} is not registered in the database")
 
-        return int(self.medicines['medicines'][name]['modifier'])
+        return float(self.medicines['medicines'][name]['modifier'])
 
 
-    def change_modifier(self, name: str, amount: int) -> str:
+    def change_modifier(self, name: str, amount: float) -> str:
         '''Change the modifier value
 
         Args:
             name (str): Name of medicine
-            amount (int): New modifier amount
+            amount (float): New modifier amount
 
         Returns:
             (str): A string to confirm
@@ -225,7 +225,7 @@ class Medicine():
         return f"\n{name} modifier {old} changed to {amount}\n"
 
 
-    def add_new(self, name: str, quantity: int, modifier: int) -> str:
+    def add_new(self, name: str, quantity: float, modifier: float) -> str:
         name = name.upper()
         self.medicines["medicines"][name] = {
             "quantity": quantity,

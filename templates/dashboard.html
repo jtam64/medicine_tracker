@@ -55,11 +55,11 @@
                         <!-- Change quantity -->
                         <div stye="display: flex; flex-direction: row;">
                             <label for="quantity" class="form-label">Edit quantity</label>
-                            <input id="quantity" type="number" class="form-control" name="quantity" placeholder="{{ values.quantity }}" value="{{ values.quantity }}">
-                            <button type="button" onclick="increment(-100, 'quantity')" class="btn btn-primary">-100</button>
-                            <button type="button" onclick="increment(-10, 'quantity')" class="btn btn-primary">-10</button>
-                            <button type="button" onclick="increment(10, 'quantity')" class="btn btn-primary">+10</button>
-                            <button type="button" onclick="increment(100, 'quantity')" class="btn btn-primary">+100</button>
+                            <input id="{{ item }}" type="number" class="form-control" name="quantity" placeholder="{{ values.quantity }}" value="{{ values.quantity }}">
+                            <button type="button" onclick="increment(-100, '{{ item }}')" class="btn btn-primary">-100</button>
+                            <button type="button" onclick="increment(-10, '{{ item }}')" class="btn btn-primary">-10</button>
+                            <button type="button" onclick="increment(10, '{{ item }}')" class="btn btn-primary">+10</button>
+                            <button type="button" onclick="increment(100, '{{ item }}')" class="btn btn-primary">+100</button>
                         </div>
                         <!-- Change modifier -->
                         <label for="modifier" class="form-label">Edit modifier</label>
@@ -123,8 +123,8 @@
         </div>
     </form>
 <script>
-    function increment(value, element){
-        let currentValue = document.getElementById(element);
+    function increment(value, item){
+        let currentValue = document.getElementById(item);
         currentValue.value = parseInt(currentValue.value) + value;
       }
 </script>

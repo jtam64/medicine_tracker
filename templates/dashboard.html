@@ -53,11 +53,13 @@
                         <label for="name" class="form-label">Edit name</label>
                         <input type="text" name="name" value="{{ item }}">
                         <!-- Change quantity -->
-                        <div stye="display: flex; flex-direction: row;">
+                        <div stye="display: flex; flex-direction: column;">
                             <label for="quantity" class="form-label">Edit quantity</label>
-                            <input id="{{ item }}" type="number" class="form-control" name="quantity" placeholder="{{ values.quantity }}" value="{{ values.quantity }}">
+                            <input id="{{ item }}" type="number" class="form-control" style="width: 20%;" name="quantity" placeholder="{{ values.quantity }}" value="{{ values.quantity }}">
                             <button type="button" onclick="increment(-100, '{{ item }}')" class="btn btn-primary">-100</button>
                             <button type="button" onclick="increment(-10, '{{ item }}')" class="btn btn-primary">-10</button>
+                            <label for="addquantity" class="form-label"></label>
+                            <input type="number" class="form-label" style="width: 10%;" name="addquantity" placeholder="0" value="0">
                             <button type="button" onclick="increment(10, '{{ item }}')" class="btn btn-primary">+10</button>
                             <button type="button" onclick="increment(100, '{{ item }}')" class="btn btn-primary">+100</button>
                         </div>

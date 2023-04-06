@@ -21,10 +21,12 @@ def dashboard():
             name = request.form.get("name")
             old_name = request.form.get("oldname")
             quantity = request.form.get("quantity")
+            addquantity = request.form.get("addquantity")
             modifier = request.form.get("modifier")
             type = request.form.get("type")
 
             if type == "edit":
+                quantity = float(quantity) + float(addquantity)
                 tracker.medicine_quantity(name, float(quantity))
                 tracker.change_modifier(name, float(modifier))
                 if old_name != name:

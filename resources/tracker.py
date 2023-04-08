@@ -134,7 +134,7 @@ class Medicine():
         Returns:
             dict: A dictionary of all the medicines
         '''
-        return dict((sorted(self.medicines["medicines"].items(), key=lambda x: x[1]["end_date"])))
+        return dict((sorted(self.medicines["medicines"].items(), key=lambda x: x[1]["remaining_days"])))
 
 
     def update_quantity(self):

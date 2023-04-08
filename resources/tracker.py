@@ -36,6 +36,7 @@ class Medicine():
         Returns:
             (str): A string for confirmation
         '''
+        quantity = round(quantity, 1)
         name = name.upper()
         if name not in self.medicines["medicines"].keys():
             return (f"{name} is not registered in the database")
@@ -59,6 +60,7 @@ class Medicine():
         Returns:
             (str): A string for confirmation
         '''
+        quantity = round(quantity, 1)
         name = name.upper()
         if name not in self.medicines["medicines"].keys():
             return (f"{name} is not registered in the database")
@@ -98,6 +100,7 @@ class Medicine():
         Returns:
             (str): A string for confirmation
         '''
+        quantity = round(quantity, 1)
         name = name.upper()
         if name not in self.medicines["medicines"].keys():
             return (f"{name} is not registered in the database")
@@ -131,7 +134,7 @@ class Medicine():
         Returns:
             dict: A dictionary of all the medicines
         '''
-        return self.medicines["medicines"]
+        return dict((sorted(self.medicines["medicines"].items(), key=lambda x: x[1]["end_date"])))
 
 
     def update_quantity(self):
@@ -207,6 +210,7 @@ class Medicine():
         Returns:
             (str): A string to confirm
         '''
+        amount = round(amount, 1)
         name = name.upper()
         if name not in self.medicines["medicines"].keys():
             return (f"{name} is not registered in the database")
@@ -226,6 +230,17 @@ class Medicine():
 
 
     def add_new(self, name: str, quantity: float, modifier: float) -> str:
+        '''Add new medication 
+
+        Args:
+            name (str): Name of medication
+            quantity (float): Quantity to be added
+            modifier (float): How many pills are taken per day
+
+        Returns:
+            str: Confirmation string
+        '''
+        quantity = round(quantity, 1)
         name = name.upper()
         self.medicines["medicines"][name] = {
             "quantity": quantity,

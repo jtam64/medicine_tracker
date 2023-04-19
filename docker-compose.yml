@@ -1,31 +1,33 @@
 version: "3.9"
 
 services:
-  NGINX:
-    container_name: nginx
-    image: nginx:latest
-    ports:
-    - "1554:1554"
-    volumes:
-    - ./nginx.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-    - web
-    networks:
-    - my-network
+    NGINX:
+        restart: always
+        container_name: nginx
+        image: nginx:latest
+        ports:
+        - "1554:1554"
+        volumes:
+        - ./nginx.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+        - web
+        networks:
+        - my-network
 
 
-  web:
-    build: .
-    container_name: app
-    image: med_tracker
-    ports:
-    - "5000:5000"
-    volumes:
-    - .:/app
-    networks:
-      my-network:
-        aliases:
-          - flask-app
+    web:
+        build: .
+        restart: always
+        container_name: app
+        image: med_tracker
+        ports:
+        - "5000:5000"
+        volumes:
+        - .:/app
+        networks:
+        my-network:
+            aliases:
+            - flask-app
 
 networks:
   my-network:

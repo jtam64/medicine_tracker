@@ -25,9 +25,9 @@ services:
         volumes:
         - .:/app
         networks:
-        my-network:
-            aliases:
-            - flask-app
+            my-network:
+                aliases:
+                - flask-app
 
 networks:
   my-network:

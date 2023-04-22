@@ -39,15 +39,15 @@ class Medicine():
         quantity = round(quantity, 1)
         name = name.upper()
         if name not in self.medicines["medicines"].keys():
-            return (f"{name} is not registered in the database")
+            return f"{name} is not registered in the database"
 
         if quantity < 0:
-            return False
+            return f"Cannot add negative quantity to {name}"
 
         self.medicines["medicines"][name]["quantity"] += quantity
         self.write_JSON()
         self.update_quantity()
-        return f"\nAdded {quantity} to {name}\n"
+        return f"Added {quantity} to {name}\n"
 
 
     def remove_medicine(self, name: str, quantity: float) -> str:
@@ -66,12 +66,12 @@ class Medicine():
             return (f"{name} is not registered in the database")
 
         if quantity < 0:
-            return False
+            return "Cannot remove negative quantity from {name}"
 
         self.medicines["medicines"][name]["quantity"] -= quantity
         self.write_JSON()
         self.update_quantity()
-        return f"\nRemoved {quantity} from {name}\n"
+        return f"Removed {quantity} from {name}\n"
 
 
     def check_quantity(self, name: str) -> float:
@@ -112,7 +112,7 @@ class Medicine():
         elif quantity < old_quantity:
             return self.remove_medicine(name, old_quantity - quantity)
         else:
-            return False
+            return ""
 
 
     def __str__(self) -> str:
@@ -217,16 +217,16 @@ class Medicine():
 
         old = self.check_modifier(name)
 
-        if amount == old:
-            return False
+        if float(amount) == float(old):
+            return ""
         
         if amount < 0:
-            return False
+            return f"{amount} is not a valid modifier"
 
         self.medicines["medicines"][name]["modifier"] = amount
         self.write_JSON()
         self.update_quantity()
-        return f"\n{name} modifier {old} changed to {amount}\n"
+        return f"{name} modifier {old} changed to {amount}"
 
 
     def add_new(self, name: str, quantity: float, modifier: float) -> str:
@@ -251,7 +251,7 @@ class Medicine():
 
         self.update(name)
 
-        return f"\nadded medication {name} with quantity {quantity}\n"
+        return f"Added medication {name} with quantity {quantity}\n"
 
 
     def delete_medicine(self, name:str) -> bool:
@@ -265,13 +265,13 @@ class Medicine():
         '''
         name = name.upper()
         if name not in self.medicines["medicines"].keys():
-            return False
+            return f"{name} is not registered in the database"
 
         self.medicines["medicines"].pop(name)
 
         self.write_JSON()
         self.update_quantity()
-        return True
+        return f"Deleted {name} from the database"
     
     def change_name(self, old_name: str, new_name: str) -> bool:
         '''Change the name of the medication
@@ -286,11 +286,11 @@ class Medicine():
         old_name = old_name.upper()
         new_name = new_name.upper()
         if old_name not in self.medicines["medicines"].keys():
-            return False
+            return f"{old_name} is not registered in the database"
 
         self.medicines["medicines"][new_name] = self.medicines["medicines"].pop(old_name)
         self.write_JSON()
         self.update_quantity()
-        return True
+        return f"Changed name from {old_name} to {new_name}"
     
 a = Medicine()

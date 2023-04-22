@@ -12,12 +12,14 @@ def index():
 
 @app.route('/dashboard', methods=["GET", "POST"])
 def dashboard():
+    message = request.args.get("message")
     if request.method == "GET":
         tracker.update_quantity()
-        return render_template("dashboard.html", data=tracker.dashboard_info())
+        return render_template("dashboard.html", data=tracker.dashboard_info(), message = message)
 
     elif request.method == "POST":
         try:
+            message = ""
             name = request.form.get("name")
             old_name = request.form.get("oldname")
             quantity = request.form.get("quantity")
@@ -27,21 +29,22 @@ def dashboard():
 
             if type == "edit":
                 quantity = float(quantity) + float(addquantity)
-                tracker.medicine_quantity(name, float(quantity))
-                tracker.change_modifier(name, float(modifier))
+                message += "\n" + tracker.medicine_quantity(name, float(quantity))
+                message += "\n" + tracker.change_modifier(name, float(modifier))
                 if old_name != name:
-                    tracker.change_name(old_name, name)
+                    message = "\n" + tracker.change_name(old_name, name)
 
             elif type == "delete":
-                tracker.delete_medicine(name)
+                message = tracker.delete_medicine(name)
             
             elif type == "add":
-                tracker.add_new(name.upper(), float(quantity), float(modifier))
+                message = tracker.add_new(name.upper(), float(quantity), float(modifier))
 
-            return redirect(url_for("dashboard"))
+            return redirect(url_for("dashboard", message=message))
         
         except:
-            return redirect(url_for("dashboard"))
+            message = "Could not update. Unknown error"
+            return redirect(url_for("dashboard", message=message))
 
 if __name__ == "__main__":
     app.run(debug=True)

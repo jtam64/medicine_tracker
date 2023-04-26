@@ -19,9 +19,6 @@
         </nav>
         <div>
             {% block content %}
-            {% for message in get_flashed_messages() %}
-                <h2>{{ message }}</h2>
-            {% endfor %}
             {% endblock %}
         </div>
     </div>

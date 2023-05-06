@@ -29,8 +29,8 @@ def dashboard():
 
             if type == "edit":
                 quantity = float(quantity) + float(addquantity)
-                message += "\n" + tracker.medicine_quantity(name, float(quantity))
-                message += "\n" + tracker.change_modifier(name, float(modifier))
+                message += "\n" + tracker.medicine_quantity(old_name, float(quantity))
+                message += "\n" + tracker.change_modifier(old_name, float(modifier))
                 if old_name != name:
                     message = "\n" + tracker.change_name(old_name, name)
 

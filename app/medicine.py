@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, Date, Float, String
+from base import Base
 
-class Medicine():
+class Medicine(Base):
     __tablename__="medicine"
     id = Column(Integer, primary_key=True)
     name = Column(String,nullable=False)

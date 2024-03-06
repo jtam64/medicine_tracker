@@ -1,3 +1,3 @@
 version: 1
 datastore:
-  filename: database.db
+  filename: database.sqlite

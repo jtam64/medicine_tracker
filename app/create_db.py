@@ -10,11 +10,11 @@ cur = con.cursor()
 
 cur.execute("""CREATE TABLE medicine(
             id INTEGER PRIMARY KEY ASC,
-            name TEXT NOT NULL,
+            name VARCHAR(100) NOT NULL,
             quantity INTEGER NOT NULL,
             remaining_days INTEGER NOT NULL,
             modifier REAL NOT NULL,
-            end_date TEXT NOT NULL
+            end_date VARCHAR(100) NOT NULL
         )""")
 
 con.commit()

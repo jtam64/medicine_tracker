@@ -1,0 +1,114 @@
+openapi: 3.0.0
+servers: []
+info:
+  title: Simple Medicine Tracker API
+  description: This is a simple API
+  version: "1.0.0"
+paths:
+  /medicine:
+    get:
+      summary: searches db for medication
+      operationId: app.get_medicine
+      parameters:
+        - name: medication_id
+          in: query
+          description: id of medication
+          schema:
+            type: integer
+            example: 2
+      responses:
+        "200":
+          description: found medication
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/medicine_id'
+        "404":
+          description: Medication not found
+    post:
+      summary: adds a medication item to db
+      description: Adds an item to the db
+      operationId: app.populate_medicine
+      requestBody:
+        description: Medicine to add
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/medicine'
+      responses:
+        "201":
+          description: item created and return ID
+          content:
+            application/json:
+              schema:
+                type: string
+                example: 2
+        "400":
+          description: "invalid input, object invalid"
+        "409":
+          description: an existing item already exists
+
+components:
+  schemas:
+    medicine:
+      required:
+      - name
+      - quantity
+      - remaining_days
+      - modifier
+      - end_date
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        name:
+          type: string
+          example: tylenol
+        quantity:
+          type: integer
+          example: 56
+        remaining_days:
+          type: integer
+          example: 32
+        modifier:
+          type: number
+          format: float
+          example: 3.5
+        end_date:
+          type: string
+          format: date
+          example: 2024-03-06
+
+    medicine_id:
+      required:
+      - id
+      - name
+      - quantity
+      - remaining_days
+      - modifier
+      - end_date
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        name:
+          type: string
+          example: tylenol
+        quantity:
+          type: integer
+          example: 56
+        remaining_days:
+          type: integer
+          example: 32
+        modifier:
+          type: number
+          format: float
+          example: 3.5
+        end_date:
+          type: string
+          format: date
+          example: 2024-03-06

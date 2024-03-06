@@ -9,11 +9,13 @@ con = sqlite3.connect(app_config["datastore"]["filename"])
 cur = con.cursor()
 
 cur.execute("""CREATE TABLE medicine(
-            name TEXT,
-            quantity INTEGER,
-            remaining_days INTEGER,
-            modifier REAL,
-            end_date TEXT
-)""")
+            id INTEGER PRIMARY KEY ASC,
+            name TEXT NOT NULL,
+            quantity INTEGER NOT NULL,
+            remaining_days INTEGER NOT NULL,
+            modifier REAL NOT NULL,
+            end_date TEXT NOT NULL
+        )""")
 
 con.commit()
+con.close()

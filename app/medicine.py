@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, DateTime, Float, String
+from sqlalchemy import Column, Integer, Date, Float, String
 
 class Medicine():
     __tablename__="medicine"
@@ -7,7 +7,7 @@ class Medicine():
     quantity = Column(Float,nullable=False)
     remaining_days = Column(Integer,nullable=False)
     modifier = Column(Float,nullable=False)
-    end_date = Column(DateTime,nullable=False)
+    end_date = Column(Date,nullable=False)
 
     def __init__(self, name, quantity, remaining_days, modifier, end_date):
         self.name = name
@@ -22,5 +22,5 @@ class Medicine():
         dict['quantity'] = self.quantity
         dict['remaining_days'] = self.remaining_days
         dict['modifier'] = self.modifier
-        dict['end_date'] = self.end_date
+        dict['end_date'] = self.end_date.strftime("%Y-%m-%d")
         return dict

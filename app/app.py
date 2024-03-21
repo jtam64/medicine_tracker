@@ -7,7 +7,6 @@ from medicine import Medicine
 from functions import calculate_remaining
 
 import yaml
-import datetime
 
 import logging
 import logging.config
@@ -162,4 +161,4 @@ app.add_api("openapi.yml", strict_validation=True, validate_responses=True)
 
 
 if __name__ == "__main__":
-    app.run(port=2000)
+    app.run(port=80)

@@ -133,6 +133,30 @@ def modify_medication(body):
         logger.info(f"Updated medication with id: {id}")
         return "Updated medication", 200
 
+def remove_medication(body):
+    session = DB_SESSION()
+
+    "Get ID from body"
+    id = body["id"]
+    logger.info(f"Beginning query for ID: {id}")
+
+    if session.query(Medicine).count() < 1:
+        "Check if anything exists in DB"
+        logger.info(f"Empty db. Nothing returned")
+        return "No values in DB. Please populate", 404
+
+    elif not bool(session.query(Medicine).filter_by(id=id).first()):
+        "Check if medication exists in DB. If not, return error."
+        logger.info(f"Medication does not exist in DB")
+        return "Medication not found", 404
+
+    else:
+        session.query(Medicine).filter_by(id=id).delete()
+        logger.info(f"Found medication with ID: {id}")
+        session.commit()
+        logger.info(f"Succesfully removed medication with ID: {id}")
+        return "Removed medication", 200
+
 app = connexion.FlaskApp(__name__, specification_dir="")
 app.add_api("openapi.yml", strict_validation=True, validate_responses=True)
 

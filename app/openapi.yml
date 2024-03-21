@@ -71,8 +71,32 @@ paths:
                 example: "Successfully changed medication"
         "400":
           description: "invalid input, object invalid"
-        "409":
-          description: an existing item already exists
+        "404":
+          description: "medication not found"
+
+  /remove_medication:
+    post:
+      summary: remove medication
+      description: get id and remove it from db
+      operationId: app.remove_medication
+      requestBody:
+        description: Medicine to remove
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/remove_medication'
+      responses:
+        "200":
+          description: removed succesfully
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Successfully removed medication"
+        "400":
+          description: "invalid input, object invalid"
+        "404":
+          description: "medication not found"
 
 components:
   schemas:
@@ -143,4 +167,13 @@ components:
           type: number
           format: float
           example: 5.5
+
+    remove_medication:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
 

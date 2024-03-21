@@ -4,6 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from base import Base
 from medicine import Medicine
+from functions import calculate_remaining
 
 import yaml
 import datetime
@@ -77,9 +78,7 @@ def populate_medicine(body):
         name, quantity, modifier = body["name"], body["quantity"], body["modifier"]
 
         "Calculate remaining_days and end_date"
-        today = datetime.date.today()
-        end_date = today + datetime.timedelta(modifier)
-        remaining_days = int(quantity / modifier)
+        end_date, remaining_days = calculate_remaining(quantity, modifier)
 
         "Add new medication to DB"
         data = Medicine(
@@ -99,7 +98,40 @@ def populate_medicine(body):
         written_data = session.query(Medicine).filter_by(name=body["name"]).first()
         return written_data.id, 201
 
+def modify_medication(body):
+    session = DB_SESSION()
 
+    "Extract information from body"
+    id, name, quantity, modifier = body["id"], body["name"], body["quantity"], body["modifier"]
+
+    logger.info(f"Beginning query for ID: {id}")
+
+    if session.query(Medicine).count() < 1:
+        "Check if anything exists in DB"
+        logger.info(f"Empty db. Nothing returned")
+        return "No values in DB. Please populate", 404
+
+    elif not bool(session.query(Medicine).filter_by(id=id).first()):
+        "Check if medication exists in DB. If not, return error."
+        logger.info(f"Medication does not exist in DB")
+        return "Medication not found", 404
+
+    else:
+        "Calculate remaining_days and end_date"
+        end_date, remaining_days = calculate_remaining(quantity, modifier)
+
+        medication = session.query(Medicine).filter_by(id=id).first()
+        logger.info(f"Found medication with ID: {id}")
+        
+        medication.name = name
+        medication.quantity = quantity
+        medication.remaining_days = remaining_days
+        medication.modifier = modifier
+        medication.end_date = end_date
+        
+        session.commit()
+        logger.info(f"Updated medication with id: {id}")
+        return "Updated medication", 200
 
 app = connexion.FlaskApp(__name__, specification_dir="")
 app.add_api("openapi.yml", strict_validation=True, validate_responses=True)

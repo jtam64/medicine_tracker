@@ -5,7 +5,7 @@ info:
   description: This is a simple API
   version: "1.0.0"
 paths:
-  /medicine:
+  /search_medicine:
     get:
       summary: searches db for medication
       operationId: app.get_medicine
@@ -27,6 +27,7 @@ paths:
                   $ref: '#/components/schemas/medicine_id'
         "404":
           description: Medication not found
+  /add_medicine:
     post:
       summary: adds a medication item to db
       description: Adds an item to the db
@@ -45,6 +46,29 @@ paths:
               schema:
                 type: integer
                 example: 2
+        "400":
+          description: "invalid input, object invalid"
+        "409":
+          description: an existing item already exists
+  /modify_medication:
+    post:
+      summary: modify medication
+      description: change a value in the db
+      operationId: app.modify_medication
+      requestBody:
+        description: Medicine to change
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/modify_medication'
+      responses:
+        "200":
+          description: changed medication succesfully
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Successfully changed medication"
         "400":
           description: "invalid input, object invalid"
         "409":
@@ -100,3 +124,23 @@ components:
           type: string
           format: date
           example: 2024-03-06
+    
+    modify_medication:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        name:
+          type: string
+          example: tylenol
+        quantity:
+          type: integer
+          example: 20
+        modifier:
+          type: number
+          format: float
+          example: 5.5
+

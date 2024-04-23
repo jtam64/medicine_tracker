@@ -2,5 +2,9 @@ services:
     medicine_store:
         build: ./medicine_store
         image: medicine_store
+        restart: always
         ports:
-            - "8000:8000"
+            - "8900:8900"
+        volumes:
+            - D:\NextCloud\Desktop\Docker\medicine_tracker/medicine_store/database.sqlite:/app/database.sqlite
+

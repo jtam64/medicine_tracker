@@ -7,6 +7,7 @@ from medicine import Medicine
 from functions import calculate_remaining
 import create_db
 from os.path import exists
+import datetime
 
 import yaml
 
@@ -21,6 +22,12 @@ with open("log_conf.yml", "r") as f:
     logging.config.dictConfig(log_config)
 
 logger = logging.getLogger('basicLogger')
+logger.info("Begin logging")
+
+# create db if it doesnt exist
+if not exists(app_config["datastore"]["filename"]):
+    logger.info("Creating DB")
+    create_db.main()
 
 DB_ENGINE = create_engine("sqlite:///%s" % app_config["datastore"]["filename"])
 Base.metadata.bind = DB_ENGINE
@@ -153,13 +160,51 @@ def remove_medication(body):
         logger.info(f"Succesfully removed medication with ID: {id}")
         return "Removed medication", 200
 
-# create db if it doesnt exist
-if not exists(app_config["datastore"]["filename"]):
-    create_db()
+def daily_update(body):
+    session = DB_SESSION()
+
+    if session.query(Medicine).count() < 1:
+        "Check if anything exists in DB"
+        logger.info(f"Empty db. Nothing returned")
+        return "No values in DB. Please populate", 404
+    else:
+        "Get todays date"
+        today = datetime.datetime.now().date()
+        input_date = datetime.datetime.strptime(body["date"], "%Y-%m-%d").date()
+
+        "Return 202 if there is nothing to update"
+        if input_date >= today:
+            return "No updates needed", 202
+        else:
+            "Get all medications"
+            medications = session.query(Medicine).all()
+
+            "for each medication"
+            for medicine in medications:
+                logger.info(f"Begin updating {medicine.name}")
+                "Calculate quantity change"
+                days_since = today - input_date
+                used_amount = int(days_since.days * medicine.modifier)
+                print(used_amount)
+                quantity = medicine.quantity - used_amount
+
+                "Calculate remaining days and end date"
+                end_date, remaining_days = calculate_remaining(medicine.quantity, medicine.modifier)
+
+                "Update the medication"
+                medicine.quantity = quantity
+                medicine.remaining_days = remaining_days
+                medicine.end_date = end_date
+                
+                logger.info(f"Updated {medicine.name}")
+                session.commit()
+
+            logger.info("Updated all medications")
+            return "Updated all medications", 200
+
 
 app = connexion.FlaskApp(__name__, specification_dir="")
 app.add_api("openapi.yml", strict_validation=True, validate_responses=True)
 
-
 if __name__ == "__main__":
-    app.run(port=8000)
+    app.run(port=8900)

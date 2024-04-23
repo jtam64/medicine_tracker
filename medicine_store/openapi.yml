@@ -73,7 +73,6 @@ paths:
           description: "invalid input, object invalid"
         "404":
           description: "medication not found"
-
   /remove_medication:
     post:
       summary: remove medication
@@ -97,6 +96,39 @@ paths:
           description: "invalid input, object invalid"
         "404":
           description: "medication not found"
+  /daily_update:
+    post:
+      summary: update all medication daily
+      description: checks if date has changed then updates all quantities of medicine
+      operationId: app.daily_update
+      requestBody:
+        description: Current date
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/daily_update'
+      responses:
+        "200":
+          description: all updated
+          content:
+            application/json:
+              schema:
+                type: string
+                example: All medications updated
+        "202":
+          description: nothing to update
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Nothing to update
+        "404":
+          description: DB is empty
+          content:
+            application/json:
+              schema:
+                type: string
+                example: DB is empty
 
 components:
   schemas:
@@ -177,3 +209,12 @@ components:
           type: integer
           example: 2
 
+    daily_update:
+      required:
+      - date
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          example: 2024-03-06

@@ -185,7 +185,6 @@ def daily_update(body):
                 "Calculate quantity change"
                 days_since = today - input_date
                 used_amount = int(days_since.days * medicine.modifier)
-                print(used_amount)
                 quantity = medicine.quantity - used_amount
 
                 "Calculate remaining days and end date"

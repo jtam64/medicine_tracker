@@ -5,26 +5,23 @@ from sqlalchemy.orm import sessionmaker
 from base import Base
 from medicine import Medicine
 from functions import calculate_remaining
+import create_db
+from os.path import exists
 
 import yaml
 
 import logging
 import logging.config
 
-"""Initial setup of application"""
-
-"App config"
 with open("app_conf.yml", "r") as f:
     app_config = yaml.safe_load(f.read())
 
-"App logging"
 with open("log_conf.yml", "r") as f:
     log_config = yaml.safe_load(f.read())
     logging.config.dictConfig(log_config)
 
 logger = logging.getLogger('basicLogger')
 
-"SQLite DB Connection"
 DB_ENGINE = create_engine("sqlite:///%s" % app_config["datastore"]["filename"])
 Base.metadata.bind = DB_ENGINE
 DB_SESSION = sessionmaker(bind=DB_ENGINE)
@@ -156,9 +153,13 @@ def remove_medication(body):
         logger.info(f"Succesfully removed medication with ID: {id}")
         return "Removed medication", 200
 
+# create db if it doesnt exist
+if not exists(app_config["datastore"]["filename"]):
+    create_db()
+
 app = connexion.FlaskApp(__name__, specification_dir="")
 app.add_api("openapi.yml", strict_validation=True, validate_responses=True)
 
 
 if __name__ == "__main__":
-    app.run(port=80)
+    app.run(port=8000)

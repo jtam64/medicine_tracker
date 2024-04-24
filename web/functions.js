@@ -21,6 +21,29 @@ const renderHTML = (data) => {
     })
 }
 
+const modMedicine = (id) => {
+
+}
+
+const removeMedicine = (id) => {
+    fetch('http://localhost:8900/remove_medication', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({id: Number(id)}),
+        }
+    )
+    .then(response => response.json())
+    .then(data => {
+        console.log('Server Response', data);
+        window.location.reload();
+    })
+    .catch(error => {
+        console.log('Error sending data:', error);
+    })
+}
+
 const addMedicineButton = () => {
     const form = document.getElementById('addMedicine')
     if (form.style.display === "none") {

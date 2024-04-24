@@ -13,13 +13,25 @@ services:
     daily_updater:
         build: ./daily_updater
         image: daily_updater
-        # restart: always
+        restart: always
         volumes:
             - D:\NextCloud\Desktop\Docker\medicine_tracker/daily_updater/database.sqlite:/app/database.sqlite
         networks:
             - app_net
         depends_on:
             - medicine_store
+
+    web:
+        build: ./web
+        image: web
+        restart: always
+        ports:
+            - 9000:80
+        networks:
+            - app_net
+        depends_on:
+            - medicine_store
+            - daily_updater
 
 networks:
     app_net:

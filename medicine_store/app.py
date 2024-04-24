@@ -8,6 +8,7 @@ from functions import calculate_remaining
 import create_db
 from os.path import exists
 import datetime
+from flask_cors import CORS
 
 import yaml
 
@@ -24,7 +25,7 @@ with open("log_conf.yml", "r") as f:
 logger = logging.getLogger('basicLogger')
 logger.info("Begin logging")
 
-# create db if it doesnt exist
+"create db if it doesnt exist"
 if not exists(app_config["datastore"]["filename"]):
     logger.info("Creating DB")
     create_db.main()
@@ -232,6 +233,7 @@ def daily_update(body):
 
 
 app = connexion.FlaskApp(__name__, specification_dir="")
+CORS(app.app, resources={r"/*": {"origins": "*"}})
 app.add_api("openapi.yml", strict_validation=True, validate_responses=True)
 
 if __name__ == "__main__":

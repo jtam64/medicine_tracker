@@ -15,14 +15,45 @@ const renderHTML = (data) => {
                         <p>Remaining Days=${medicine.remaining_days}</p>
                         <p>Modifier=${medicine.modifier}</p>
                         <p>End Date=${medicine.end_date}</p>
-                        <button onclick="modMedicine(${medicine.id})">Change Medicine</button>
+                        <button onclick="toggleButton('modMedicineFormDiv${medicine.name}')">Change Medicine</button>
+                        <div style="display:none;" id="modMedicineFormDiv${medicine.name}">
+                            <form id="modMedicineForm">
+                                <input type="hidden" name="id" id="id" value="${medicine.id}">
+                                <input type="text" name="name" id="name" value="${medicine.name}">
+                                <input type="number" name="quantity" id="quantity" value="${medicine.quantity}">
+                                <input type="number" name="modifier" id="modifier" value="${medicine.modifier}">
+                                <input type="submit" value="Submit" onclick="modMedicine()"></input>
+                                <input type="submit" value="Cancel" onclick="cancel()"></input>
+                        </div>
                         <button onclick="removeMedicine(${medicine.id})">Remove Medicine</button>`
         list.appendChild(div)
     })
 }
 
-const modMedicine = (id) => {
+const cancel = () => {
+    window.location.reload();
+}
 
+const modMedicine = () => {
+    const form = document.getElementById('modMedicineForm');
+    const formData = new FormData(form);
+
+    const formDataObject = {};
+
+    formData.forEach((value, key) => {
+        formDataObject[key] = !isNaN(value) ? Number(value) : value;
+    });
+
+    const data = JSON.stringify(formDataObject);
+
+    fetch('http://localhost:8900/modify_medication', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: data,
+        }
+    )
 }
 
 const removeMedicine = (id) => {
@@ -44,8 +75,8 @@ const removeMedicine = (id) => {
     })
 }
 
-const addMedicineButton = () => {
-    const form = document.getElementById('addMedicine')
+const toggleButton = (tag) => {
+    const form = document.getElementById(tag)
     if (form.style.display === "none") {
         form.style.display = "block"
     } else {

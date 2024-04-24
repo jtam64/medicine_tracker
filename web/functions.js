@@ -54,7 +54,7 @@ const modMedicine = (medicineId) => {
         body: data,
         }
     )
-    window.location.replace("http://192.168.0.19:9000");
+    .then(() => {window.location.replace("http://192.168.0.19:9000")})
 }
 
 const removeMedicine = (id) => {
@@ -69,8 +69,8 @@ const removeMedicine = (id) => {
     .then(response => response.json())
     .then(data => {
         console.log('Server Response', data);
-        window.location.replace("http://192.168.0.19:9000");
     })
+    .then(() => {window.location.replace("http://192.168.0.19:9000")})
     .catch(error => {
         console.log('Error sending data:', error);
     })
@@ -108,8 +108,8 @@ const addMedicine = () => {
     .then(response => response.json())
     .then(data => {
         console.log('Server Response', data);
-        window.location.replace("http://192.168.0.19:9000");
     })
+    .then(() => {window.location.replace("http://192.168.0.19:9000")})
     .catch(error => {
         console.log('Error sending data:', error);
     })

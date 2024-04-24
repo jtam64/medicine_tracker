@@ -1,5 +1,5 @@
 const getAll = () => {
-    return fetch('http://localhost:8900/get_all')
+    return fetch('http://medicine_tracker-medicine_store-1:8900/get_all')
         .then(response => response.json())
         .then(data => renderHTML(data))
 }
@@ -46,7 +46,7 @@ const modMedicine = () => {
 
     const data = JSON.stringify(formDataObject);
 
-    fetch('http://localhost:8900/modify_medication', {
+    fetch('http://medicine_tracker-medicine_store-1:8900/modify_medication', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ const modMedicine = () => {
 }
 
 const removeMedicine = (id) => {
-    fetch('http://localhost:8900/remove_medication', {
+    fetch('http://medicine_tracker-medicine_store-1:8900/remove_medication', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ const addMedicine = () => {
     const data = JSON.stringify(formDataObject);
     console.log(data)
 
-    fetch('http://localhost:8900/add_medicine', {
+    fetch('http://medicine_tracker-medicine_store-1:8900/add_medicine', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -115,9 +115,9 @@ const addMedicine = () => {
 }
 
 const setup = () => {
-    // const interval = setInterval(() => {
-    //     getAll()
-    // }, 5000);
+    const interval = setInterval(() => {
+        getAll()
+    }, 5000);
 
     getAll()
 }

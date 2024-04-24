@@ -54,6 +54,7 @@ const modMedicine = () => {
         body: data,
         }
     )
+    window.location.replace("http://192.168.0.19:9000");
 }
 
 const removeMedicine = (id) => {
@@ -68,7 +69,7 @@ const removeMedicine = (id) => {
     .then(response => response.json())
     .then(data => {
         console.log('Server Response', data);
-        window.location.reload();
+        window.location.replace("http://192.168.0.19:9000");
     })
     .catch(error => {
         console.log('Error sending data:', error);
@@ -95,7 +96,6 @@ const addMedicine = () => {
     });
 
     const data = JSON.stringify(formDataObject);
-    console.log(data)
 
     fetch('http://192.168.0.19:8900/add_medicine', {
         method: 'POST',
@@ -108,6 +108,7 @@ const addMedicine = () => {
     .then(response => response.json())
     .then(data => {
         console.log('Server Response', data);
+        window.location.replace("http://192.168.0.19:9000");
     })
     .catch(error => {
         console.log('Error sending data:', error);

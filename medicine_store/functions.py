@@ -1,6 +1,7 @@
 import datetime
 
-def calculate_remaining(quantity:int, modifier:int):
+def calculate_remaining(quantity:int, modifier:float):
+    print(quantity, modifier)
     "Calculate remaining_days and end_date"
     today = datetime.date.today()
 

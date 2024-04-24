@@ -21,7 +21,7 @@ const renderHTML = (data) => {
                                 <input type="hidden" name="id" id="id" value="${medicine.id}">
                                 <input type="text" name="name" id="name" value="${medicine.name}">
                                 <input type="number" name="quantity" id="quantity" value="${medicine.quantity}">
-                                <input type="number" name="modifier" id="modifier" value="${medicine.modifier}">
+                                <input type="number" name="modifier" id="modifier" step="0.5 value="${medicine.modifier}">
                                 <input type="submit" value="Submit" onclick="modMedicine()"></input>
                                 <input type="submit" value="Cancel" onclick="cancel()"></input>
                         </div>

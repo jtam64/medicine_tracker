@@ -27,6 +27,22 @@ paths:
                   $ref: '#/components/schemas/medicine_id'
         "404":
           description: Medication not found
+  /get_all:
+    get: 
+      summary: get a list of all medications
+      operationId: app.get_all
+      responses:
+        "200": 
+          description: returning all medications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/get_all'
+        "404":
+          description: no medications in DB
+
   /add_medicine:
     post:
       summary: adds a medication item to db
@@ -215,6 +231,37 @@ components:
       type: object
       properties:
         date:
+          type: string
+          format: date
+          example: 2024-03-06
+    
+    get_all:
+      required:
+      - id
+      - name
+      - quantity
+      - remaining_days
+      - modifier
+      - end_date
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        name:
+          type: string
+          example: tylenol
+        quantity:
+          type: integer
+          example: 56
+        remaining_days:
+          type: integer
+          example: 32
+        modifier:
+          type: number
+          format: float
+          example: 3.5
+        end_date:
           type: string
           format: date
           example: 2024-03-06

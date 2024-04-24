@@ -64,6 +64,35 @@ def get_medicine(medication_id:int):
         }
         return data, 200
 
+def get_all():
+    """Get all data for medicines"""
+    logger.info("Request started for all medications")
+    
+    session = DB_SESSION()
+
+    if session.query(Medicine).count() < 1:
+        "Check if anything exists in DB"
+        logger.info(f"Empty db. Nothing returned")
+        return "No values in DB. Please populate", 404
+    
+    else:
+        "Return all medication data"
+        medications = session.query(Medicine).all()
+        logger.info("Found all medications")
+
+        data = []
+
+        for medication in medications:
+            data.append({
+                "id": medication.id,
+                "name": medication.name,
+                "quantity": medication.quantity,
+                "remaining_days": medication.remaining_days,
+                "modifier": medication.modifier,
+                "end_date": medication.end_date,
+            })
+
+        return data, 200
 
 def populate_medicine(body):
     """Post new data into db"""

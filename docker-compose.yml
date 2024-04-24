@@ -6,7 +6,7 @@ services:
         ports:
             - "8900:8900"
         volumes:
-            - D:\NextCloud\Desktop\Docker\medicine_tracker/medicine_store/database.sqlite:/app/database.sqlite
+            - /mnt/Data/database.sqlite:/app/database.sqlite
         networks:
             - app_net
 
@@ -15,7 +15,7 @@ services:
         image: daily_updater
         restart: always
         volumes:
-            - D:\NextCloud\Desktop\Docker\medicine_tracker/daily_updater/database.sqlite:/app/database.sqlite
+            - /mnt/data/database.sqlite:/app/database.sqlite
         networks:
             - app_net
         depends_on:

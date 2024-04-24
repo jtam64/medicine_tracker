@@ -1,0 +1,7 @@
+version: 1
+datastore:
+  filename: database.sqlite
+update:
+  frequency: 3600
+  url: "medicine_tracker-medicine_store-1"
+  port: 8900

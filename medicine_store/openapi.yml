@@ -1,0 +1,267 @@
+openapi: 3.0.0
+servers: []
+info:
+  title: Simple Medicine Tracker API
+  description: This is a simple API
+  version: "1.0.0"
+paths:
+  /search_medicine:
+    get:
+      summary: searches db for medication
+      operationId: app.get_medicine
+      parameters:
+        - name: medication_id
+          in: query
+          description: id of medication
+          schema:
+            type: integer
+            example: 2
+      responses:
+        "200":
+          description: found medication
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/medicine_id'
+        "404":
+          description: Medication not found
+  /get_all:
+    get: 
+      summary: get a list of all medications
+      operationId: app.get_all
+      responses:
+        "200": 
+          description: returning all medications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/get_all'
+        "404":
+          description: no medications in DB
+
+  /add_medicine:
+    post:
+      summary: adds a medication item to db
+      description: Adds an item to the db
+      operationId: app.populate_medicine
+      requestBody:
+        description: Medicine to add
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/medicine'
+      responses:
+        "201":
+          description: item created and return ID
+          content:
+            application/json:
+              schema:
+                type: integer
+                example: 2
+        "400":
+          description: "invalid input, object invalid"
+        "409":
+          description: an existing item already exists
+  /modify_medication:
+    post:
+      summary: modify medication
+      description: change a value in the db
+      operationId: app.modify_medication
+      requestBody:
+        description: Medicine to change
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/modify_medication'
+      responses:
+        "200":
+          description: changed medication succesfully
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Successfully changed medication"
+        "400":
+          description: "invalid input, object invalid"
+        "404":
+          description: "medication not found"
+  /remove_medication:
+    post:
+      summary: remove medication
+      description: get id and remove it from db
+      operationId: app.remove_medication
+      requestBody:
+        description: Medicine to remove
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/remove_medication'
+      responses:
+        "200":
+          description: removed succesfully
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Successfully removed medication"
+        "400":
+          description: "invalid input, object invalid"
+        "404":
+          description: "medication not found"
+  /daily_update:
+    post:
+      summary: update all medication daily
+      description: checks if date has changed then updates all quantities of medicine
+      operationId: app.daily_update
+      requestBody:
+        description: Current date
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/daily_update'
+      responses:
+        "200":
+          description: all updated
+          content:
+            application/json:
+              schema:
+                type: string
+                example: All medications updated
+        "202":
+          description: nothing to update
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Nothing to update
+        "404":
+          description: DB is empty
+          content:
+            application/json:
+              schema:
+                type: string
+                example: DB is empty
+
+components:
+  schemas:
+    medicine:
+      required:
+      - name
+      - quantity
+      - modifier
+      type: object
+      properties:
+        name:
+          type: string
+          example: tylenol
+        quantity:
+          type: integer
+          example: 56
+        modifier:
+          type: number
+          format: float
+          example: 3.5
+
+    medicine_id:
+      required:
+      - id
+      - name
+      - quantity
+      - remaining_days
+      - modifier
+      - end_date
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        name:
+          type: string
+          example: tylenol
+        quantity:
+          type: integer
+          example: 56
+        remaining_days:
+          type: integer
+          example: 32
+        modifier:
+          type: number
+          format: float
+          example: 3.5
+        end_date:
+          type: string
+          format: date
+          example: 2024-03-06
+    
+    modify_medication:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        name:
+          type: string
+          example: tylenol
+        quantity:
+          type: integer
+          example: 20
+        modifier:
+          type: number
+          format: float
+          example: 5.5
+
+    remove_medication:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+
+    daily_update:
+      required:
+      - date
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          example: 2024-03-06
+    
+    get_all:
+      required:
+      - id
+      - name
+      - quantity
+      - remaining_days
+      - modifier
+      - end_date
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        name:
+          type: string
+          example: tylenol
+        quantity:
+          type: integer
+          example: 56
+        remaining_days:
+          type: integer
+          example: 32
+        modifier:
+          type: number
+          format: float
+          example: 3.5
+        end_date:
+          type: string
+          format: date
+          example: 2024-03-06

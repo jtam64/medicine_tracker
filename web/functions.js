@@ -115,9 +115,9 @@ const addMedicine = () => {
 }
 
 const setup = () => {
-    const interval = setInterval(() => {
-        getAll()
-    }, 5000);
+    // const interval = setInterval(() => {
+    //     getAll()
+    // }, 5000);
 
     getAll()
 }

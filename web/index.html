@@ -17,7 +17,15 @@
         </div>
     </div>
     <div>
-        <button onclick="addMedicine()">Add Medicine</button>
+        <button onclick="addMedicineButton()">Add Medicine</button>
+        <div style="display:none;" id="addMedicine">
+            <form id="medicineForm">
+                <input type="text" name="name" id="name" placeholder="Medicine Name">
+                <input type="number" name="quantity" id="quantity" placeholder="Quantity">
+                <input type="number" name="modifier" id="modifier" placeholder="Modifier">
+                <input type="submit" value="Submit" onclick="addMedicine()"></input>
+            </form>
+        </div>
     </div>
 </body>
 </html>

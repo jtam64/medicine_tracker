@@ -21,6 +21,45 @@ const renderHTML = (data) => {
     })
 }
 
+const addMedicineButton = () => {
+    const form = document.getElementById('addMedicine')
+    if (form.style.display === "none") {
+        form.style.display = "block"
+    } else {
+        form.style.display = "none"
+    }
+}
+
+const addMedicine = () => {
+    const form = document.getElementById('medicineForm');
+    const formData = new FormData(form);
+
+    const formDataObject = {};
+
+    formData.forEach((value, key) => {
+        formDataObject[key] = !isNaN(value) ? Number(value) : value;
+    });
+
+    const data = JSON.stringify(formDataObject);
+    console.log(data)
+
+    fetch('http://localhost:8900/add_medicine', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: data,
+        }
+    )
+    .then(response => response.json())
+    .then(data => {
+        console.log('Server Response', data);
+    })
+    .catch(error => {
+        console.log('Error sending data:', error);
+    })
+}
+
 const setup = () => {
     // const interval = setInterval(() => {
     //     getAll()
@@ -28,5 +67,7 @@ const setup = () => {
 
     getAll()
 }
+
+
 
 document.addEventListener('DOMContentLoaded', setup)

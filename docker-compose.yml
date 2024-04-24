@@ -6,7 +6,7 @@ services:
         ports:
             - "8900:8900"
         volumes:
-            - /mnt/Data/medicine_tracker/medicine_store/database.sqlite:/app/database.sqlite
+            - medicine_store_db:/data
         networks:
             - app_net
 
@@ -15,7 +15,7 @@ services:
         image: daily_updater
         restart: always
         volumes:
-            - /mnt/Data/medicine_tracker/daily_updater/database.sqlite:/app/database.sqlite
+            - daily_updater_db:/data
         networks:
             - app_net
         depends_on:
@@ -35,3 +35,7 @@ services:
 
 networks:
     app_net:
+
+volumes:
+    medicine_store_db:
+    daily_updater_db:

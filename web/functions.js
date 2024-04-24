@@ -17,12 +17,12 @@ const renderHTML = (data) => {
                         <p>End Date=${medicine.end_date}</p>
                         <button onclick="toggleButton('modMedicineFormDiv${medicine.name}')">Change Medicine</button>
                         <div style="display:none;" id="modMedicineFormDiv${medicine.name}">
-                            <form id="modMedicineForm">
+                            <form id="modMedicineForm${medicine.id}">
                                 <input type="hidden" name="id" id="id" value="${medicine.id}">
                                 <input type="text" name="name" id="name" value="${medicine.name}">
                                 <input type="number" name="quantity" id="quantity" value="${medicine.quantity}">
                                 <input type="number" name="modifier" id="modifier" step="0.5" value="${medicine.modifier}">
-                                <input type="submit" value="Submit" onclick="modMedicine()"></input>
+                                <input type="submit" value="Submit" onclick="modMedicine(${medicine.id})"></input>
                                 <input type="submit" value="Cancel" onclick="cancel()"></input>
                         </div>
                         <button onclick="removeMedicine(${medicine.id})">Remove Medicine</button>`
@@ -34,8 +34,8 @@ const cancel = () => {
     window.location.reload();
 }
 
-const modMedicine = () => {
-    const form = document.getElementById('modMedicineForm');
+const modMedicine = (medicineId) => {
+    const form = document.getElementById(`modMedicineForm${medicineId}`);
     const formData = new FormData(form);
 
     const formDataObject = {};

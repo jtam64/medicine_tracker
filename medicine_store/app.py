@@ -203,7 +203,9 @@ def daily_update(body):
         input_date = datetime.datetime.strptime(body["date"], "%Y-%m-%d").date()
 
         "Return 202 if there is nothing to update"
-        if input_date >= today:
+
+        if input_date <= today:
+            logger.info("No updates needed")
             return "No updates needed", 202
         else:
             "Get all medications"

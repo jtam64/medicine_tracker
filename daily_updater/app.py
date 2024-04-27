@@ -37,10 +37,12 @@ session = DB_SESSION()
 def update_date():
     logger.info("Checking last update")
     try:
+        logger.info("Last update entry found")
         db_query = session.query(LastUpdate).first()
         last_update = db_query.last_update
     except:
         "Empty DB. Add first entry"
+        logger.info("No last update entry found. Adding first entry")
         last_update = datetime.datetime.now().date()
 
         data = LastUpdate(last_update)
@@ -50,8 +52,8 @@ def update_date():
     today = datetime.datetime.now().date()
 
     if last_update < today:
-        logger.info("Updating date")
-        requests.post(f"http://{app_config['update']['url']}:{app_config['update']['port']}/daily_update", json = {"date": str(today)})
+        logger.info(f"Updating date {last_update} to {today}")
+        requests.post(f"http://{app_config['update']['url']}:{app_config['update']['port']}/daily_update", json = {"date": str(last_update)})
 
         db_query.last_update = today
 

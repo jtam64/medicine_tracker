@@ -1,5 +1,5 @@
 const getAll = () => {
-    return fetch('http://192.168.0.19:8900/get_all')
+    return fetch('http://localhost:8900/get_all')
         .then(response => response.json())
         .then(data => renderHTML(data))
 }
@@ -46,7 +46,7 @@ const modMedicine = (medicineId) => {
 
     const data = JSON.stringify(formDataObject);
 
-    fetch('http://192.168.0.19:8900/modify_medication', {
+    fetch('http://localhost:8900/modify_medication', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -54,11 +54,11 @@ const modMedicine = (medicineId) => {
         body: data,
         }
     )
-    .then(() => {window.location.replace("http://192.168.0.19:9000")})
+    .then(() => {window.location.replace("http://localhost:9000")})
 }
 
 const removeMedicine = (id) => {
-    fetch('http://192.168.0.19:8900/remove_medication', {
+    fetch('http://localhost:8900/remove_medication', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const removeMedicine = (id) => {
     .then(data => {
         console.log('Server Response', data);
     })
-    .then(() => {window.location.replace("http://192.168.0.19:9000")})
+    .then(() => {window.location.replace("http://localhost:9000")})
     .catch(error => {
         console.log('Error sending data:', error);
     })
@@ -97,7 +97,7 @@ const addMedicine = () => {
 
     const data = JSON.stringify(formDataObject);
 
-    fetch('http://192.168.0.19:8900/add_medicine', {
+    fetch('http://localhost:8900/add_medicine', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ const addMedicine = () => {
     .then(data => {
         console.log('Server Response', data);
     })
-    .then(() => {window.location.replace("http://192.168.0.19:9000")})
+    .then(() => {window.location.replace("http://localhost:9000")})
     .catch(error => {
         console.log('Error sending data:', error);
     })

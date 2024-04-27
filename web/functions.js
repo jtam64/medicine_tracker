@@ -11,10 +11,10 @@ const renderHTML = (data) => {
         const div = document.createElement('div')
         div.setAttribute('class', 'item')
         div.innerHTML = `<h3>${medicine.name.toUpperCase()}</h3>
-                        <p>Quantity= ${medicine.quantity}</p>
-                        <p>Remaining Days=${medicine.remaining_days}</p>
-                        <p>Modifier=${medicine.modifier}</p>
-                        <p>End Date=${medicine.end_date}</p>
+                        <p>Quantity = ${medicine.quantity}</p>
+                        <p>Remaining Days = ${medicine.remaining_days}</p>
+                        <p>Modifier = ${medicine.modifier}</p>
+                        <p>End Date = ${medicine.end_date}</p>
                         <button onclick="toggleButton('modMedicineFormDiv${medicine.name}')">Change Medicine</button>
                         <div style="display:none;" id="modMedicineFormDiv${medicine.name}">
                             <form id="modMedicineForm${medicine.id}">

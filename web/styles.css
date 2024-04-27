@@ -15,3 +15,15 @@
     color: white;
     text-align: center;
 }
+
+#subtitle {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#title {
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+}

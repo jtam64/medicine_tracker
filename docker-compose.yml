@@ -7,6 +7,7 @@ services:
             - "8900:8900"
         volumes:
             - medicine_store_db:/data
+            - /mnt/Data/medicine_tracker/logs/medicine_store:/logs/
         networks:
             - app_net
 
@@ -16,6 +17,7 @@ services:
         restart: always
         volumes:
             - daily_updater_db:/data
+            - /mnt/Data/medicine_tracker/logs/daily_updater:/logs/
         networks:
             - app_net
         depends_on:

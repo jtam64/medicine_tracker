@@ -8,6 +8,7 @@ services:
         volumes:
             - medicine_store_db:/data
             - /mnt/Data/medicine_tracker/logs/medicine_store:/logs/
+            - /mnt/Data/medicine_tracker/app_configs/medicine_store:/app_configs/
         networks:
             - app_net
 
@@ -18,6 +19,7 @@ services:
         volumes:
             - daily_updater_db:/data
             - /mnt/Data/medicine_tracker/logs/daily_updater:/logs/
+            - /mnt/Data/medicine_tracker/app_configs/daily_updater:/app_configs/
         networks:
             - app_net
         depends_on:

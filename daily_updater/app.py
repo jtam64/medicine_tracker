@@ -51,6 +51,8 @@ def update_date():
 
     today = datetime.datetime.now().date()
 
+    logger.info(f"Last update: {last_update}, Today: {today}")
+
     if last_update < today:
         logger.info(f"Updating date {last_update} to {today}")
         requests.post(f"http://{app_config['update']['url']}:{app_config['update']['port']}/daily_update", json = {"date": str(last_update)})

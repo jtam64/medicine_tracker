@@ -204,7 +204,7 @@ def daily_update(body):
 
         "Return 202 if there is nothing to update"
 
-        if input_date <= today:
+        if input_date >= today:
             logger.info("No updates needed")
             return "No updates needed", 202
         else:
